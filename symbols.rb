@@ -15,9 +15,13 @@ $symbols = Hash.new
 
 def loadType(type)
     $symbols[type] = Hash.new
-    File.read($replacementsDir+type).split("\n").each do |l|
-        name, sym = l.split ':'
-        $symbols[type][name] = sym
+    begin
+        File.read($replacementsDir+type).split("\n").each do |l|
+            name, sym = l.split ':'
+            $symbols[type][name] = sym
+        end
+    rescue Errno::ENOENT #file not found
+        $symbols[type] = nil
     end
 end
 
@@ -30,7 +34,7 @@ def replacement(text)
     if $symbols[type] and $symbols[type][symbol]
         $symbols[type][symbol]
     else
-        "{* Symbol not found: #{symbol}}"
+        "{* Symbol not found: #{text}}"
     end
 end
 
