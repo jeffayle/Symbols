@@ -16,7 +16,8 @@ $symbols = Hash.new
 def loadType(type)
     $symbols[type] = Hash.new
     begin
-        File.read($replacementsDir+type).split("\n").each do |l|
+        File.read($replacementsDir+type,encoding:'UTF-8').split("\n").each do
+            |l|
             name, sym = l.split ':'
             $symbols[type][name] = sym
         end
