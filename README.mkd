@@ -1,0 +1,42 @@
+# Symbols
+Symbols is a command line program that will read input from standard input,
+and output the same text with replacements made for special characters.
+
+## Usage
+To use, simply run `symbols` from the command line. Any text you enter will be
+processed. To get special characters, use `{type/symbol}` where type is a
+category, and symbol is the specific symbol.
+
+For example,
+
+    I have 5{sym/cent}
+
+Will become
+
+    I have 5¢
+
+Characters are UTF-8, however any character set can be used by replacing the
+files in the `replacements` directory.
+
+## Installation
+Copy `symbols.rb` and the `replacements` directory somewhere where they can be
+read by any user who will be running the program.
+
+Create a symlink to `symbols.rb` somewhere in your path (For example, ~/bin for
+a single user, or /usr/bin for all users).
+
+Ruby is required to run the program.
+
+## Adding symbols
+Each file in the `replacements` directory is a `type`. You can add new types
+by creating a new text file in that directory.
+
+Symbols are represented in the files in the format `symbol:replacement`, for
+example (out of the `punct` file),
+
+    en dash:–
+    em dash:—
+    inverted !:¡
+
+To see what symbols are available, look at the lines of the `replacements`
+files.
